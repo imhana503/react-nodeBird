@@ -1,24 +1,41 @@
-import { HYDRATE } from 'next-redux-wrapper';
-import { combineReducers} from 'redux';
+// import { HYDRATE } from 'next-redux-wrapper';
+// import { combineReducers} from 'redux';
 
-import user from './user';
-import post from './post';
-
-
-
-const rootReducer = combineReducers({
-  index:(state = {}, action)=>{
-    switch(action.type){
-      case HYDRATE : 
-        console.log('HYDRATE', action);
-        return {...state, ...action.payload}
-      
-      default :
-        return state
-    }
+const initialState = {
+  user:{
+    isLoggedIn : false,
+    user : null,
+    signUpData : {},
+    loginData : {},
   },
-  user,
-  post,
-});
+  post:{
+    mainPsots:[],
+  }
+}
+
+export const loginAction = (data) => {
+  return{
+    type:'LOG_IN',
+    data,
+  }
+}
+
+
+
+//이전상태, 액션상태로 => 다음상태를 만들어준다.
+const rootReducer = (state = initialState, action)=>{
+  switch(action.type){
+    case 'LOG_IN' :
+      return{
+        ...state,
+        user:{
+          ...state.user,
+          isLoggedIn:true,
+          user:action.data
+        }
+        
+      }
+  }
+}
 
 export default rootReducer;

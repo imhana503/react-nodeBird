@@ -1,10 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 import AppLayout from '../components/AppLayout';
+import PostForm from '../components/PostForm';
 
 const Home = () => {
+  const [isLoggedIn, setIsLoggedIn] = useState(true);
+
   return(
     <AppLayout>
-      홈 메뉴
+      {isLoggedIn && <PostForm/>}
     </AppLayout>
     
   )
