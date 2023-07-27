@@ -1,62 +1,7 @@
 import React, { useState } from 'react';
+import { Overlay, Header, CloseBtn, SlickWrapper, ImgWrapper, Global, Indicator } from './styles';
 import PropTypes from 'prop-types';
 import Slick from 'react-slick';
-import styled, { createGlobalStyle } from 'styled-components';
-
-const Overlay = styled.div`
-    position:fixed;
-    z-index:500;
-    top:0;
-    left:0;
-    right:0;
-    bottom:0;
-`
-
-const Header = styled.header`
-    height:44px;
-    background-color:whtie;
-    position:relative;
-    padding:0;
-    text-align:center;
-    & h1 {
-        margin:0;
-        font-size:17px;
-        color:#333;
-        line-height:44px;
-    }
-
-    & button{
-        position:absolute;
-        top:;
-        right:0;
-        padding:15px;
-        line-height:14px;
-        cursor:pointer;
-    }
-`
-
-const SlickWrapper = styled.div`
-    height:calc(100% - 44px);
-    background:#090909;
-`
-const ImgWrapper = styled.div`
-    padding:32px;
-    text-align:center;
-    & img {
-        margin:0 auto;
-        max-height:750px;
-    }
-`;
-
-const Global = createGlobalStyle`
-    .slick-slide{
-        display:inline-block
-    }
-
-    .slick-track{
-        transform:none !important
-    }
-`
 
 const ImagesZoom = ({ images, onClose }) => {
     const [currentSlide, setCurrentSlide] = useState(0);
@@ -66,7 +11,7 @@ const ImagesZoom = ({ images, onClose }) => {
             <Global/>
             <Header>
                 <h1>상세 이미지</h1>
-                <button onClick={onClose}>X</button>
+                <CloseBtn onClick={onClose}>X</CloseBtn>
             </Header>
             <SlickWrapper>
                 <div>
@@ -84,6 +29,14 @@ const ImagesZoom = ({ images, onClose }) => {
                             </ImgWrapper>
                         ))}
                     </Slick>
+                    <Indicator>
+                        <div>
+                            {currentSlide +1}
+                            {' '}
+                            /
+                            {images.length}
+                        </div>
+                    </Indicator>
                 </div>
             </SlickWrapper>
         </Overlay>

@@ -3,9 +3,24 @@ import Link from 'next/link';
 import PropTypes from 'prop-types';
 import LoginForm from './LoginForm';
 import UserProfile from './UserProfile';
-import styled from 'styled-components';
+import styled, { createGlobalStyle } from 'styled-components';
 import { Menu, Input, Button, Row, Col } from 'antd';
 import { useSelector } from 'react-redux';
+
+const Global = createGlobalStyle`
+  .ant-row{
+    margin-right:0 !import;
+    margin-left:0 !import;
+  }
+
+  .ant-col:first-child {
+    padding-left: 0 !important
+  }
+
+  .ant-col:last-child {
+    padding-right: 0 !important
+  }
+`
 
 const SearchInput = styled(Input.Search)`
   vertical-align:middle
@@ -17,6 +32,7 @@ const AppLayout = ({ children }) => {
 
   return (
     <div>
+      <Global/>
       <Menu mode="horizontal">
         <Menu.Item key="home"><Link href="/">노드버드</Link></Menu.Item>
         <Menu.Item key="profile"><Link href="/profile">프로필</Link></Menu.Item>
